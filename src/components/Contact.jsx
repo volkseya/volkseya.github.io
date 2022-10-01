@@ -1,16 +1,51 @@
 import React, { useState } from "react";
-import { TextField, Typography, Box, Paper, Grid, Button } from "@mui/material";
+import {
+  TextField,
+  Typography,
+  Box,
+  Paper,
+  Grid,
+  Button,
+  Snackbar,
+  Alert,
+} from "@mui/material";
+import { send } from "emailjs-com";
 
 function Contact() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState("");
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    success: false,
+  });
+  const [toSend, setToSend] = useState({
+    from_name: "",
+    from_email: "",
+    to_name: "Pawat Treepoca",
+    subject: "",
+    message: "",
+    reply_to: "",
+  });
 
-  const onNameChange = (e) => setName(e.target.value);
-  const onEmailChange = (e) => setEmail(e.target.value);
-  const onSubjectChange = (e) => setSubject(e.target.value);
-  const onMessageChange = (e) => setMessage(e.target.value);
+  const handleChange = (e) => {
+    setToSend({ ...toSend, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = () => {
+    send("service_8kvtukg", "template_f8djeos", toSend, "i1BlVNEU4e_n-egqo")
+      .then(() => {
+        setSnackbar({ open: true, success: true });
+      })
+      .catch(() => {
+        setSnackbar({ open: true, success: false });
+      });
+  };
+
+  const handleCloseSnackbar = (_event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setSnackbar({ ...snackbar, open: false });
+  };
 
   return (
     <Box sx={{ width: "100%" }}>
@@ -18,15 +53,16 @@ function Contact() {
         Contact Me
       </Typography>
       <Typography variant="body1" gutterBottom>
-        If you’d like to chat about a project or just have question, please fill
-        in the form below. I aim to get back within 2 days.
+        If you’d like to ask me some questions about anything, feel free to
+        contact me by filling in the form below. I'll reply as soon as I can.
       </Typography>
       <Paper className="p-8">
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
             <TextField
-              value={name}
-              onChange={onNameChange}
+              name="from_name"
+              value={toSend.from_name}
+              onChange={handleChange}
               label="Name"
               className="w-full"
               required
@@ -34,8 +70,9 @@ function Contact() {
           </Grid>
           <Grid item xs={12} md={6}>
             <TextField
-              value={email}
-              onChange={onEmailChange}
+              name="from_email"
+              value={toSend.from_email}
+              onChange={handleChange}
               label="Email"
               className="w-full"
               required
@@ -43,8 +80,9 @@ function Contact() {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              value={subject}
-              onChange={onSubjectChange}
+              name="subject"
+              value={toSend.subject}
+              onChange={handleChange}
               label="Subject"
               className="w-full"
               required
@@ -52,8 +90,9 @@ function Contact() {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              value={message}
-              onChange={onMessageChange}
+              name="message"
+              value={toSend.message}
+              onChange={handleChange}
               label="Message"
               className="w-full"
               multiline
@@ -62,10 +101,35 @@ function Contact() {
             />
           </Grid>
           <Grid item xs={12}>
-            <Button variant="contained">Send Message</Button>
+            <Button variant="contained" onClick={onSubmit}>
+              Send Message
+            </Button>
           </Grid>
         </Grid>
       </Paper>
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+      >
+        {snackbar.success ? (
+          <Alert
+            onClose={handleCloseSnackbar}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            The message was sent successfully.
+          </Alert>
+        ) : (
+          <Alert
+            onClose={handleCloseSnackbar}
+            severity="error"
+            sx={{ width: "100%" }}
+          >
+            An error occured when sending the message.
+          </Alert>
+        )}
+      </Snackbar>
     </Box>
   );
 }
