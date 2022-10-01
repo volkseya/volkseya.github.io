@@ -13,9 +13,9 @@ import { useNavigate } from "react-router-dom";
 
 const ResponsiveAppBar = () => {
   const navigate = useNavigate();
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
 
-  const handleOpenNavMenu = (event) => {
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
 
@@ -23,7 +23,7 @@ const ResponsiveAppBar = () => {
     setAnchorElNav(null);
   };
 
-  const handleNavigateTo = (url) => {
+  const handleNavigateTo = (url: string) => {
     navigate(url);
     setAnchorElNav(null);
   };

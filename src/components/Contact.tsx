@@ -29,7 +29,7 @@ function Contact() {
   const templateId = `${process.env.REACT_APP_EMAILJS_TEMPLATE_ID}`
   const userId = `${process.env.REACT_APP_EMAILJS_USER_ID}`
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setToSend({ ...toSend, [e.target.name]: e.target.value });
   };
 
@@ -43,7 +43,7 @@ function Contact() {
       });
   };
 
-  const handleCloseSnackbar = (_event, reason) => {
+  const handleCloseSnackbar = (_event: React.SyntheticEvent | Event, reason?: string) => {
     if (reason === "clickaway") {
       return;
     }
