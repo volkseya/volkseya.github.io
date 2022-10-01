@@ -10,6 +10,7 @@ import {
   Alert,
 } from "@mui/material";
 import { send } from "emailjs-com";
+import { SERVICE_ID, TEMPLATE_ID, USER_ID } from "../emailjs.constants"
 
 function Contact() {
   const [snackbar, setSnackbar] = useState({
@@ -30,7 +31,7 @@ function Contact() {
   };
 
   const onSubmit = () => {
-    send("service_8kvtukg", "template_f8djeos", toSend, "i1BlVNEU4e_n-egqo")
+    send(SERVICE_ID, TEMPLATE_ID, toSend, USER_ID)
       .then(() => {
         setSnackbar({ open: true, success: true });
       })
