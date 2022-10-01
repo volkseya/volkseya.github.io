@@ -10,7 +10,6 @@ import {
   Alert,
 } from "@mui/material";
 import { send } from "emailjs-com";
-import { SERVICE_ID, TEMPLATE_ID, USER_ID } from "../emailjs.constants"
 
 function Contact() {
   const [snackbar, setSnackbar] = useState({
@@ -26,12 +25,16 @@ function Contact() {
     reply_to: "",
   });
 
+  const serviceId = `${process.env.REACT_APP_EMAILJS_SERVICE_ID}`
+  const templateId = `${process.env.REACT_APP_EMAILJS_TEMPLATE_ID}`
+  const userId = `${process.env.REACT_APP_EMAILJS_USER_ID}`
+
   const handleChange = (e) => {
     setToSend({ ...toSend, [e.target.name]: e.target.value });
   };
 
   const onSubmit = () => {
-    send(SERVICE_ID, TEMPLATE_ID, toSend, USER_ID)
+    send(serviceId, templateId, toSend, userId)
       .then(() => {
         setSnackbar({ open: true, success: true });
       })
