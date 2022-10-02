@@ -3,6 +3,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import { Home, Contact, Navbar } from "./components";
 import Container from "@mui/material/Container";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="contact" element={<Contact />} />
         </Routes>
+      <Footer />
       </Container>
     </div>
   );
