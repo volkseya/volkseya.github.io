@@ -1,16 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.e0d49982.css",
-    "main.js": "/static/js/main.d8959f87.js",
+    "main.css": "/static/css/main.980684e1.css",
+    "main.js": "/static/js/main.dba0da1a.js",
     "static/js/787.d9181030.chunk.js": "/static/js/787.d9181030.chunk.js",
-    "static/media/pawat_thairun_shirt.jpg": "/static/media/pawat_thairun_shirt.2b1ec8a93f3b20cd9075.jpg",
     "index.html": "/index.html",
-    "main.e0d49982.css.map": "/static/css/main.e0d49982.css.map",
-    "main.d8959f87.js.map": "/static/js/main.d8959f87.js.map",
+    "main.980684e1.css.map": "/static/css/main.980684e1.css.map",
+    "main.dba0da1a.js.map": "/static/js/main.dba0da1a.js.map",
     "787.d9181030.chunk.js.map": "/static/js/787.d9181030.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e0d49982.css",
-    "static/js/main.d8959f87.js"
+    "static/css/main.980684e1.css",
+    "static/js/main.dba0da1a.js"
   ]
 }
