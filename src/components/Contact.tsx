@@ -78,9 +78,8 @@ function Contact() {
             <Grid item xs={12} md={6}>
               <TextField
                 {...register("from_name", { required: true })}
-                label="Name"
+                label="Name *"
                 className="w-full"
-                required
                 error={!!errors.from_name}
                 helperText={
                   errors.from_name?.type === "required" && "Name is required"
@@ -96,9 +95,8 @@ function Contact() {
                     message: "Please enter a valid email address",
                   },
                 })}
-                label="Email"
+                label="Email *"
                 className="w-full"
-                required
                 error={!!errors.from_email}
                 helperText={errors.from_email?.message}
               />
@@ -106,9 +104,8 @@ function Contact() {
             <Grid item xs={12}>
               <TextField
                 {...register("subject", { required: true })}
-                label="Subject"
+                label="Subject *"
                 className="w-full"
-                required
                 error={!!errors.subject}
                 helperText={
                   errors.subject?.type === "required" && "Subject is required"
@@ -118,11 +115,10 @@ function Contact() {
             <Grid item xs={12}>
               <TextField
                 {...register("message", { required: true })}
-                label="Message"
+                label="Message *"
                 className="w-full"
                 multiline
                 minRows={4}
-                required
                 error={!!errors.message}
                 helperText={
                   errors.message?.type === "required" && "Message is required"
