@@ -64,7 +64,7 @@ function Contact() {
   };
 
   return (
-    <Box sx={{ width: "100%" }}>
+    <Box className="w-100 p-8">
       <Typography variant="h3" gutterBottom>
         Contact Me
       </Typography>
