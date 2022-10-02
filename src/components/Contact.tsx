@@ -5,12 +5,13 @@ import {
   Box,
   Paper,
   Grid,
-  Button,
   Snackbar,
   Alert,
 } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
 import { send } from "emailjs-com";
 import { useForm, SubmitHandler } from "react-hook-form";
+import SendIcon from "@mui/icons-material/Send";
 
 type EmailTemplateParams = {
   from_name: string;
@@ -31,18 +32,23 @@ function Contact() {
     open: false,
     success: false,
   });
+  const [sendingEmail, setSendingEmail] = useState(false);
 
   const serviceId = `${process.env.REACT_APP_EMAILJS_SERVICE_ID}`;
   const templateId = `${process.env.REACT_APP_EMAILJS_TEMPLATE_ID}`;
   const userId = `${process.env.REACT_APP_EMAILJS_USER_ID}`;
 
   const onSubmit: SubmitHandler<EmailTemplateParams> = (data) => {
+    setSendingEmail(true);
     send(serviceId, templateId, data, userId)
       .then(() => {
         setSnackbar({ open: true, success: true });
       })
       .catch(() => {
         setSnackbar({ open: true, success: false });
+      })
+      .finally(() => {
+        setSendingEmail(false);
       });
   };
 
@@ -124,9 +130,15 @@ function Contact() {
               />
             </Grid>
             <Grid item xs={12}>
-              <Button type="submit" variant="contained">
+              <LoadingButton
+                type="submit"
+                variant="contained"
+                loading={sendingEmail}
+                endIcon={<SendIcon />}
+                loadingPosition="end"
+              >
                 Send Message
-              </Button>
+              </LoadingButton>
             </Grid>
           </Grid>
         </form>
